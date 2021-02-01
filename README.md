@@ -36,8 +36,7 @@ I want the listing to show these details
 
 ### To Do
 * Set up infrastructure
-* 
-
+*
 
 ### DB Setup
 CREATE DATABASE mmbb
@@ -45,3 +44,6 @@ CREATE TABLE listing(id SERIAL PRIMARY KEY, name VARCHAR(60), description VARCHA
 
 CREATE DATABASE mmbb_test
 CREATE TABLE listing(id SERIAL PRIMARY KEY, name VARCHAR(60), description VARCHAR(500), price_per_night SMALLINT);
+
+## Git things
+git pull origin branchname
