@@ -8,6 +8,8 @@
   <input type='submit' value='Add Listing'/>
 </form>
 
-<% if @listing %>
-<h2><%= @listing %> added!</h2>
+<% @listings.each do |listing|  %>
+  <h2><%= listing.name %> </h2>
+  <h4><%= listing.description %> </h4>
+  <h4><%= listing.price_per_night %> </h4>
 <% end %>

@@ -3,8 +3,8 @@
 require 'sinatra'
 require 'sinatra/base'
 require 'sinatra/reloader'
-
-
+require './lib/listing'
+require './lib/database_connection'
 
 class MMBB < Sinatra::Base
   configure :development do
@@ -19,7 +19,7 @@ class MMBB < Sinatra::Base
   end
 
   get '/listings' do
-    @listing = session['name']
+    @listings = Listing.all
     erb :'listings/index'
   end
 
@@ -28,7 +28,7 @@ class MMBB < Sinatra::Base
   end
 
   post '/listings' do
-    session['name'] = params['name']
+    Listing.create(name: params[:name], description: params[:description], price_per_night: params[:price_per_night])
     redirect('/listings')
   end
 
