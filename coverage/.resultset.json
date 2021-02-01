@@ -1,0 +1,98 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/seanedwards/Makers/january/monarchmakersbnb/app.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/Users/seanedwards/Makers/january/monarchmakersbnb/spec/units/listing_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/seanedwards/Makers/january/monarchmakersbnb/lib/listing.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/seanedwards/Makers/january/monarchmakersbnb/lib/database_connection.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          2,
+          2,
+          2,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1612195311
+  }
+}

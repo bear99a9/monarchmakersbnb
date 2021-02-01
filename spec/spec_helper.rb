@@ -2,6 +2,8 @@
 
 ENV['RACK_ENV'] = 'test'
 
+require './spec/units/database_helper'
+
 require 'simplecov'
 SimpleCov.start
 
