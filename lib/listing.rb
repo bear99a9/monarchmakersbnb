@@ -21,4 +21,13 @@ class Listing
       description: result['description'],
       price_per_night: result['price_per_night'].to_i)
   end
+
+  def self.all
+    results = DatabaseConnection.query("select * from listing order by id desc")
+    results.map{ |row| Listing.new(id: row['id'],
+      name: row['name'],
+      description: row['description'],
+      price_per_night: row['price_per_night'].to_i) }
+  end
+
 end
