@@ -1,8 +1,15 @@
 # frozen_string_literal: true
 
 require 'sinatra'
+require 'sinatra/base'
+require 'sinatra/reloader'
+
+
 
 class MMBB < Sinatra::Base
+  configure :development do
+    register Sinatra::Reloader
+  end
 
   enable :sessions
 

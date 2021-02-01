@@ -1,4 +1,13 @@
+<head>
+  <link href='application.css' type='text/css' rel='stylesheet'>
+</head>
+
+<h1> Welcome to MMBB!</h1>
+
 <form action='/listings/add' method='get'>
   <input type='submit' value='Add Listing'/>
 </form>
+
+<% if @listing %>
 <h2><%= @listing %> added!</h2>
+<% end %>
