@@ -8,9 +8,13 @@ gem 'bcrypt'
 gem 'pg'
 gem 'sinatra'
 gem 'sinatra-flash'
+gem 'sinatra-contrib'
+gem 'webrick'
 
-gem 'capybara', require: false, group: :test
-gem 'rspec', require: false, group: :test
-gem 'rubocop'
-gem 'simplecov', require: false, group: :test
-gem 'simplecov-console', require: false, group: :test
+group :test do
+  gem 'capybara', require: false
+  gem 'rspec', require: false
+  gem 'rubocop'
+  gem 'simplecov', require: false
+  gem 'simplecov-console', require: false
+end
