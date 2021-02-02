@@ -1,5 +1,5 @@
-feature 'Sign up' do
-  scenario 'A user can sign up' do
+feature 'Log in' do
+  scenario 'A user can log in' do
     visit('/')
     # click_button("Sign up")
     # expect(current_path).to eq('/users/new')
