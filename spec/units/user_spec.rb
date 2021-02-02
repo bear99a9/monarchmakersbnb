@@ -5,7 +5,7 @@ describe User do
   let(:email) { 'goodjobOllie@gmail.com' }
   let(:username) { 'welldoneOllie' }
   let(:password) { 'Ollieisgood' }
-  subject(:new_user) { described_class.create(name, email, username, password) }
+  subject(:new_user) { described_class.create(name: name, email: email, username: username, password: password) }
 
   describe '.create' do
     it 'returns a User object' do
@@ -44,7 +44,7 @@ describe User do
 
     context 'Happy Path: When passed correct email and password' do
       it 'returns true' do
-        expect(described_class.authenticate(email, password)).to eq true
+        expect(described_class.authenticate(email: email, password: password)).to eq true
       end
     end
 
@@ -53,11 +53,11 @@ describe User do
       let(:wrong_password) { 'Ollieisbad' }
 
       it 'returns false when incorrect email' do
-        expect(described_class.authenticate(wrong_email, password)).to eq false
+        expect(described_class.authenticate(email: wrong_email, password: password)).to eq false
       end
 
       it 'returns false when incorrect password' do
-        expect(described_class.authenticate(email, wrong_password)).to eq false
+        expect(described_class.authenticate(email: email, password: wrong_password)).to eq false
       end
 
     end
