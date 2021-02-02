@@ -3,6 +3,11 @@
 </head>
 
 <h1> Welcome to MMBB!</h1>
+<h2> Hi <%= @name %> </h2>
+
+<form action="/users/new" method="get">
+  <button type="submit" name="Sign up">Sign up</button>
+</form>
 
 <form action='/listings/add' method='get'>
   <input type='submit' value='Add Listing'/>

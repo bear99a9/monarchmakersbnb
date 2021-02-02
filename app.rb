@@ -20,6 +20,7 @@ class MMBB < Sinatra::Base
 
   get '/listings' do
     @listings = Listing.all
+    @name = session[:name]
     erb :'listings/index'
   end
 
@@ -30,6 +31,15 @@ class MMBB < Sinatra::Base
   post '/listings' do
     Listing.create(name: params[:name], description: params[:description], price_per_night: params[:price_per_night])
     redirect('/listings')
+  end
+
+  get '/users/new' do
+    erb :'users/new'
+  end
+
+  post '/users' do
+    session[:name] = params[:name]
+    redirect '/listings'
   end
 
   # start the server if ruby file executed directly
