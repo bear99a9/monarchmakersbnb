@@ -1,13 +1,13 @@
 require './lib/user.rb'
 
 describe User do
+  let(:name) { 'Ollie' }
+  let(:email) { 'goodjobOllie@gmail.com' }
+  let(:username) { 'welldoneOllie' }
+  let(:password) { 'Ollieisgood' }
+  subject(:new_user) { described_class.create(name, email, username, password) }
 
   describe '.create' do
-    let(:name) { 'Ollie' }
-    let(:email) { 'goodjobOllie@gmail.com' }
-    let(:username) { 'welldoneOllie' }
-    let(:password) { 'Ollieisgood' }
-    let(:new_user) { described_class.create(name, email, username, password) }
     it 'returns a User object' do
       expect(new_user).to be_a(User)
     end
@@ -37,4 +37,29 @@ describe User do
     end
   end
 
+  describe '.authenticate' do
+    before do
+      new_user
+    end
+
+    context 'Happy Path: When passed correct email and password' do
+      it 'returns true' do
+        expect(described_class.authenticate(email, password)).to eq true
+      end
+    end
+
+    context 'Unhappy Path: When passed incorrect email and password' do
+      let(:wrong_email) { 'badjobOllie@gmail.com' }
+      let(:wrong_password) { 'Ollieisbad' }
+
+      it 'returns false when incorrect email' do
+        expect(described_class.authenticate(wrong_email, password)).to eq false
+      end
+
+      it 'returns false when incorrect password' do
+        expect(described_class.authenticate(email, wrong_password)).to eq false
+      end
+
+    end
+  end
 end
