@@ -42,6 +42,11 @@ class MMBB < Sinatra::Base
     redirect '/listings'
   end
 
+  post '/sessions' do
+    session[:name] = params[:email]
+    redirect('/listings')
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $PROGRAM_NAME
 end

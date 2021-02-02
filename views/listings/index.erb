@@ -1,9 +1,49 @@
+<!DOCTYPE html>
+<html>
 <head>
   <link href='application.css' type='text/css' rel='stylesheet'>
+  <style>
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    border: 3px solid RGB(32,32,185);
+    border-radius: 25px;
+    padding: 5px;
+
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #F9F9F9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  </style>
 </head>
 
+<body>
+
 <h1> Welcome to MMBB!</h1>
+
+<% if @name %>
 <h2> Hi <%= @name %> </h2>
+<% end %>
+
+<div class="dropdown">
+  <span>Log in</span>
+  <div class="dropdown-content">
+    <form action="/sessions" method="post">
+      <input type='email' name='email' placeholder="email"/>
+      <input type='password' name='password' placeholder="password"/>
+      <button type="submit" name="Log in">Log in</button>
+    </form>
+  </div>
+</div>
 
 <form action="/users/new" method="get">
   <button type="submit" name="Sign up">Sign up</button>
@@ -18,3 +58,6 @@
   <h4><%= listing.description %> </h4>
   <h4><%= listing.price_per_night %> </h4>
 <% end %>
+
+</body>
+</html>
