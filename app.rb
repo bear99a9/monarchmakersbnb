@@ -3,8 +3,11 @@
 require 'sinatra'
 require 'sinatra/base'
 require 'sinatra/reloader'
+require './database_setup'
 require './lib/listing'
+require './lib/user'
 require './lib/database_connection'
+
 
 class MMBB < Sinatra::Base
   configure :development do
@@ -40,6 +43,7 @@ class MMBB < Sinatra::Base
   post '/users' do
     user = User.create(params[:name], params[:email], params[:username], params[:password])
     session[:user_id] = user.id 
+    session[:name] = user.name
     redirect '/listings'
   end
 

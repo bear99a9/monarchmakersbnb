@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+ENV['ENVIRONMENT'] = 'test'
 ENV['RACK_ENV'] = 'test'
 
 require './spec/units/database_helper'

@@ -3,17 +3,16 @@
 require 'pg'
 
 class DatabaseConnection
-  # def self.setup(dbname)
-  #
+
+  def self.setup(dbname)
+    @connection = PG.connect(dbname: dbname)
+  end
+
+  # class << self
+  #   attr_reader :connection
   # end
 
   def self.query(sql)
-    if ENV['RACK_ENV'] == 'test'
-      connection = PG.connect(dbname: 'mmbb_test')
-      connection.query(sql)
-    else
-      connection = PG.connect(dbname: 'mmbb')
-      connection.query(sql)
-    end
+    @connection.exec(sql)
   end
 end

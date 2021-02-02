@@ -16,7 +16,7 @@ class Listing
     result = DatabaseConnection.query("INSERT INTO listing(name, description,
       price_per_night) VALUES('#{name}', '#{description}', '#{price_per_night}')
       RETURNING id, name, description, price_per_night;").first
-
+  
     Listing.new(id: result['id'],
                 name: result['name'],
                 description: result['description'],
