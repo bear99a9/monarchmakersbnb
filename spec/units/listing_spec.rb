@@ -15,7 +15,7 @@ describe Listing do
 
     it 'adds it to the database' do
       listing = Listing.create(name: 'My place', description: '1 bed', price_per_night: 400)
-      persisted_data = persisted_data(id: listing.id)
+      persisted_data = persisted_data(id: listing.id, table: 'listing')
 
       expect(listing.id).to eq(persisted_data['id'])
       expect(listing.name).to eq(persisted_data['name'])
