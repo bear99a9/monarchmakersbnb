@@ -1,10 +1,12 @@
 require './lib/user.rb'
+require 'bcrypt'
 
 describe User do
   let(:name) { 'Ollie' }
   let(:email) { 'goodjobOllie@gmail.com' }
   let(:username) { 'welldoneOllie' }
   let(:password) { 'Ollieisgood' }
+  let(:results) { persisted_data(id: new_user.id, table: 'users') }
   subject(:new_user) { described_class.create(name: name, email: email, username: username, password: password) }
 
   describe '.create' do
@@ -24,15 +26,17 @@ describe User do
       expect(new_user).not_to respond_to(:password)
     end
     it 'adds an object to the users table in our db' do
-      results = persisted_data(id: new_user.id, table: 'users')
       expect(new_user.id).to eq results['id']
     end
     describe 'the data added' do
       it 'has the right data' do
-        results = persisted_data(id: new_user.id, table: 'users')
         expect(results['name']).to eq name
         expect(results['email']).to eq email
         expect(results['username']).to eq username
+        expect(BCrypt::Password.new(results['password'])).to eq password
+      end
+      it 'hashes the password' do
+        expect(results['password'].length).not_to eq password.length
       end
     end
   end
