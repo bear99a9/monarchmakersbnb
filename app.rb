@@ -41,7 +41,7 @@ class MMBB < Sinatra::Base
   end
 
   post '/users' do
-    user = User.create(params[:name], params[:email], params[:username], params[:password])
+    user = User.create(name: params[:name], email: params[:email], username: params[:username], password: params[:password])
     session[:user_id] = user.id
     session[:name] = user.name
     redirect '/listings'

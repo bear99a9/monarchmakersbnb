@@ -1,17 +1,17 @@
 require 'database_connection'
 
-describe DatabaseConnection do 
-  describe '.setup' do 
-    it 'sets up a connection to the database' do 
+describe DatabaseConnection do
+  describe '.setup' do
+    it 'sets up a connection to the database' do
 
       expect(PG).to receive(:connect).with(dbname: 'mmbb_test')
 
       DatabaseConnection.setup('mmbb_test')
-  
+
     end
   end
 
-  describe '.query' do 
+  describe '.query' do
     it 'executes a query via PG' do
       connection = DatabaseConnection.setup('mmbb_test')
 
