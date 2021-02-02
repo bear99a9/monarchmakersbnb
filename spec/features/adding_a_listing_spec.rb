@@ -1,8 +1,9 @@
-feature 'adding a listing' do
-  scenario 'go to home page and add a listing' do 
+# frozen_string_literal: true
 
+feature 'adding a listing' do
+  scenario 'go to home page and add a listing' do
     visit('/')
-    click_button "Add Listing"
+    click_button 'Add Listing'
 
     expect(current_path).to eq '/listings/add'
     expect(page).to have_content 'Add new listing'
@@ -13,6 +14,6 @@ feature 'adding a listing' do
     click_button 'Submit'
 
     expect(current_path).to eq '/listings'
-    expect(page).to have_content '1 sussex way added!'
+    expect(page).to have_content '1 sussex way'
   end
 end
