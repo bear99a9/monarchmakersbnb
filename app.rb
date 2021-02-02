@@ -42,7 +42,7 @@ class MMBB < Sinatra::Base
 
   post '/users' do
     user = User.create(params[:name], params[:email], params[:username], params[:password])
-    session[:user_id] = user.id 
+    session[:user_id] = user.id
     session[:name] = user.name
     redirect '/listings'
   end
@@ -50,6 +50,11 @@ class MMBB < Sinatra::Base
   post '/sessions' do
     session[:name] = params[:email]
     redirect('/listings')
+  end
+
+  post '/sessions/destroy' do
+    session.clear
+    redirect '/listings'
   end
 
   # start the server if ruby file executed directly
