@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
+ENV['ENVIRONMENT'] = 'test'
 ENV['RACK_ENV'] = 'test'
 
 require './spec/units/database_helper'
-
+require './spec/features/web_helpers'
 require 'simplecov'
 require 'simplecov-console'
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
@@ -14,6 +15,7 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
 SimpleCov.start
 # require our Sinatra app file
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
+require 'bcrypt'
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'

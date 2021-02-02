@@ -6,7 +6,7 @@ describe Listing do
   describe '.create' do
     it 'creates a listing' do
       listing = Listing.create(name: 'My place', description: '1 bed', price_per_night: 400)
-
+      
       expect(listing).to be_a(Listing)
       expect(listing.name).to eq('My place')
       expect(listing.description).to eq('1 bed')
