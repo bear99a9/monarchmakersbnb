@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 require 'pg'
 
-def truncate_table(table)
+p 'Setting up test database...'
+
+def truncate_test_database
   connection = PG.connect(dbname: 'mmbb_test')
-  connection.query("delete FROM #{table}")
+  connection.exec('TRUNCATE listing;')
 end
 
 def persisted_data(id:)
