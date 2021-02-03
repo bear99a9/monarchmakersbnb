@@ -19,4 +19,27 @@ feature 'Sign up' do
     expect(page).to have_button("Log out")
     expect(page).to have_button("Add Listing")
   end
+
+  # scenario 'sign up with no password' do
+  #   visit('/users/new')
+  #
+  #   fill_in('email', with: "test@test.com")
+  #   # fill_in('password', with: "")
+  #   fill_in('name', with: "John Smith")
+  #   fill_in('username', with: "jsmith1")
+  #
+  #   click_button('Submit')
+  #   expect(current_path).to eq('/users/new')
+  #   fill_in('password', with: "1234")
+  #
+  #   click_button('Submit')
+  #
+  #   expect(current_path).to eq('/listings')
+  #   # message =
+  #   #   page.find('#password').native.attribute("validationMessage")
+  #   #
+  #   # expect(message).to eq "Please fill out this field."
+  #
+  #
+  # end
 end

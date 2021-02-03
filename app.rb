@@ -13,6 +13,7 @@ require './lib/database_connection'
 class MMBB < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
+    register Sinatra::Flash
   end
 
   enable :sessions
@@ -42,6 +43,7 @@ class MMBB < Sinatra::Base
   end
 
   post '/users' do
+    
     session[:user] =  User.create(name: params[:name], email: params[:email], username: params[:username], password: params[:password])
     redirect '/listings'
   end
