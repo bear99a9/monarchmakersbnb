@@ -13,5 +13,9 @@ feature 'Sign up' do
 
     expect(current_path).to eq('/listings')
     expect(page).to have_content('Hi John Smith')
+    #not have log in
+    #not have sign up
+    # have create listing button
+    # have sign out button 
   end
 end

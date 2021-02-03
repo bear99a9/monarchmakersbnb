@@ -2,6 +2,7 @@
 
 feature 'adding a listing' do
   scenario 'go to home page and add a listing' do
+    # Create and sign in
     visit('/')
     click_button 'Add Listing'
 
