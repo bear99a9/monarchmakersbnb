@@ -25,4 +25,10 @@ class User
     BCrypt::Password.new(results['password']) == password
   end
 
+  def self.find(id:)
+    return nil unless id
+    results = DatabaseConnection.query("SELECT * FROM users WHERE id = '#{id}';").first
+    User.new(id: results['id'], name: results['name'], email: results['email'], username: results['username'])
+  end
+
 end
