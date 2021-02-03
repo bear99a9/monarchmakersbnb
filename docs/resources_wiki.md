@@ -13,3 +13,8 @@ Setup
 CSS
 ---------
 * [CSS primer](https://medium.com/arren-alexander/adding-css-to-your-sinatra-project-f82190e26ca0)
+
+SQL
+--------
+* [Stack Overflow PostgreSQL prepared Statement in Ruby](https://stackoverflow.com/questions/10841390/example-of-a-prepared-insert-statement-using-ruby-pg-gem)
+* [SQL Injection](https://www.w3schools.com/sql/sql_injection.asp)
