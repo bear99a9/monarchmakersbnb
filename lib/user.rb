@@ -12,6 +12,8 @@ class User
   end
 
   def self.create(name:, email:, username:, password:)
+    return "duplicate username" if DatabaseConnection.query("select * from users where username = '#{username}';").any?
+    return "duplicate email" if DatabaseConnection.query("select * from users where email = '#{email}';").any?
     hashed_password = BCrypt::Password.create(password)
     results = DatabaseConnection.query("INSERT INTO users (name, username, email, password)
                                       VALUES ('#{name}', '#{username}', '#{email}', '#{hashed_password}')
