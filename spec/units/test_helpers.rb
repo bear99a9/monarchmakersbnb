@@ -1,4 +1,4 @@
-def create_user 
+def create_user
   User.create(name: "Ollie", email: "ollie@gmail.com", username: "Ollie", password: "password123")
 end
 
