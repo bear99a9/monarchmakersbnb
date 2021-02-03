@@ -3,10 +3,18 @@
 require 'listing'
 
 describe Listing do
+  let(:user) { User.create(name: "Ollie", email: "ollie@gmail.com", username: "Ollie", password: "password123") }
+  let(:name) { 'My place' }
+  let(:description) { '1 bed' }
+  let(:price_per_night) { 400 }
+  let(:user_id) { user.id }
+  subject(:listing) { described_class.create(name: name, description: description, price_per_night: price_per_night, user_id: user_id) }
+
   describe '.create' do
     it 'creates a listing' do
-      listing = Listing.create(name: 'My place', description: '1 bed', price_per_night: 400)
-      
+
+      #listing = Listing.create(name: 'My place', description: '1 bed', price_per_night: 400)
+
       expect(listing).to be_a(Listing)
       expect(listing.name).to eq('My place')
       expect(listing.description).to eq('1 bed')
@@ -14,7 +22,7 @@ describe Listing do
     end
 
     it 'adds it to the database' do
-      listing = Listing.create(name: 'My place', description: '1 bed', price_per_night: 400)
+      #listing = Listing.create(name: 'My place', description: '1 bed', price_per_night: 400)
       persisted_data = persisted_data(id: listing.id, table: 'listing')
 
       expect(listing.id).to eq(persisted_data['id'])
@@ -26,8 +34,8 @@ describe Listing do
 
   describe '.all' do
     it 'lists all listings' do
-      listing = Listing.create(name: 'My place', description: '1 bed', price_per_night: 400)
-      Listing.create(name: 'My other place', description: '2 bed', price_per_night: 200)
+      listing = Listing.create(name: name, description: description, price_per_night: price_per_night, user_id: user.id)
+      Listing.create(name: 'My other place', description: '2 bed', price_per_night: 200, user_id: user.id)
       listings = Listing.all
 
       expect(listings).to all(be_an_instance_of(Listing))
