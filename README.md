@@ -40,10 +40,10 @@ I want the listing to show these details
 
 ### DB Setup
 CREATE DATABASE mmbb
-CREATE TABLE listing(id SERIAL PRIMARY KEY, name VARCHAR(60), description VARCHAR(500), price_per_night SMALLINT);
+Follow the steps in db/migrations
 
 CREATE DATABASE mmbb_test
-CREATE TABLE listing(id SERIAL PRIMARY KEY, name VARCHAR(60), description VARCHAR(500), price_per_night SMALLINT);
+Follow the steps in db/migrations
 
 ## Git things
 git pull origin branchname

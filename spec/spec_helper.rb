@@ -4,6 +4,7 @@ ENV['ENVIRONMENT'] = 'test'
 ENV['RACK_ENV'] = 'test'
 
 require './spec/units/database_helper'
+require './spec/units/test_helpers'
 require './spec/features/web_helpers'
 require 'simplecov'
 require 'simplecov-console'
