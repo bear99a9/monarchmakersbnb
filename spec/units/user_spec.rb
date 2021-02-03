@@ -66,4 +66,12 @@ describe User do
 
     end
   end
+
+  describe ".find" do
+    it "finds a user based on user id" do
+      user = User.create(name: "Anna", email: "anna@gmail.com", username: "acav", password: "password123")
+      result = User.find(id: user.id)
+      expect(result.email).to eq "anna@gmail.com"
+    end
+  end
 end
