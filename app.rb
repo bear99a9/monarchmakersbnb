@@ -3,6 +3,7 @@
 require 'sinatra'
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'sinatra/flash'
 require './database_setup'
 require './lib/listing'
 require './lib/user'
