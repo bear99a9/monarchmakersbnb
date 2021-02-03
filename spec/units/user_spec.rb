@@ -48,7 +48,7 @@ describe User do
 
     context 'Happy Path: When passed correct email and password' do
       it 'returns true' do
-        expect(described_class.authenticate(email: email, password: password)).to eq true
+        expect(described_class.authenticate(email: email, password: password)).to be_a User
       end
     end
 
@@ -57,11 +57,11 @@ describe User do
       let(:wrong_password) { 'Ollieisbad' }
 
       it 'returns false when incorrect email' do
-        expect(described_class.authenticate(email: wrong_email, password: password)).to eq false
+        expect(described_class.authenticate(email: wrong_email, password: password)).to eq nil
       end
 
       it 'returns false when incorrect password' do
-        expect(described_class.authenticate(email: email, password: wrong_password)).to eq false
+        expect(described_class.authenticate(email: email, password: wrong_password)).to eq nil
       end
 
     end
