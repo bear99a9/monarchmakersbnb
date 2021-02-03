@@ -3,6 +3,7 @@
 require 'sinatra'
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'sinatra/flash'
 require './database_setup'
 require './lib/listing'
 require './lib/user'
@@ -13,6 +14,7 @@ class MMBB < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
+  register Sinatra::Flash
 
   enable :sessions
 
@@ -41,8 +43,18 @@ class MMBB < Sinatra::Base
   end
 
   post '/users' do
-    session[:user] =  User.create(name: params[:name], email: params[:email], username: params[:username], password: params[:password])
-    redirect '/listings'
+    session[:user] = User.create(name: params[:name], email: params[:email], username: params[:username], password: params[:password])
+
+    case session[:user]
+    when "duplicate email"
+      flash[:notice] = "This email address has already been taken"
+      redirect '/users/new'
+    when "duplicate username"
+      flash[:notice] = "This username has already been taken"
+      redirect '/users/new'
+    else
+      redirect '/listings'
+    end
   end
 
   post '/sessions' do
