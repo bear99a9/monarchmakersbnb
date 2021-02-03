@@ -23,7 +23,7 @@ class MMBB < Sinatra::Base
 
   get '/listings' do
     @listings = Listing.all
-    @name = session[:name]
+    @user = session[:user]
     erb :'listings/index'
   end
 
@@ -32,7 +32,7 @@ class MMBB < Sinatra::Base
   end
 
   post '/listings' do
-    Listing.create(name: params[:name], description: params[:description], price_per_night: params[:price_per_night], user_id: session[:user_id])
+    Listing.create(name: params[:name], description: params[:description], price_per_night: params[:price_per_night], user_id: session[:user].id)
     redirect('/listings')
   end
 
@@ -41,14 +41,12 @@ class MMBB < Sinatra::Base
   end
 
   post '/users' do
-    user = User.create(name: params[:name], email: params[:email], username: params[:username], password: params[:password])
-    session[:user_id] = user.id
-    session[:name] = user.name
+    session[:user] =  User.create(name: params[:name], email: params[:email], username: params[:username], password: params[:password])
     redirect '/listings'
   end
 
   post '/sessions' do
-    session[:name] = params[:email]
+    session[:user] = User.authenticate(email: params[:email], password: params[:password])
     redirect('/listings')
   end
 

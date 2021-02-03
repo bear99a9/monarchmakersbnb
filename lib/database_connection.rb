@@ -13,7 +13,6 @@ class DatabaseConnection
   # end
 
   def self.query(sql)
-    p @connection
     @connection.exec(sql)
   end
 end

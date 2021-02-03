@@ -30,8 +30,8 @@
 
 <h1> Welcome to MMBB!</h1>
 
-<% if @name %>
-<h2> Hi <%= @name %> </h2>
+<% if @user %>
+<h2> Hi <%= @user.name %> </h2>
 
 <form  action="/sessions/destroy" method="post">
   <button type="submit" name="Log out">Log out</button>
