@@ -30,9 +30,10 @@ class Booking
                 end
   end
 
-  def self.find_all_by_user(visitor_id:)
-    return nil unless visitor_id
-    results = DatabaseConnection.query("SELECT * FROM booking WHERE visitor_id = '#{visitor_id}';")
+  def self.find_all(by:, id:)
+    return nil unless id
+    return nil unless by == "visitor" || by == "listing"
+    results = DatabaseConnection.query("SELECT * FROM booking WHERE #{by}_id = '#{id}';")
     results.map do |row|
       Booking.new(id: row['id'],
                   visitor_id: row['visitor_id'],
