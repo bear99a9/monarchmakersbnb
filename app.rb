@@ -7,6 +7,7 @@ require 'sinatra/flash'
 require './database_setup'
 require './lib/listing'
 require './lib/user'
+require './lib/booking'
 require './lib/database_connection'
 
 
