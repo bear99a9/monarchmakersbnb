@@ -2,8 +2,7 @@
 
 feature 'adding a listing' do
   scenario 'go to home page and add a listing' do
-    # Create and sign in
-    visit('/')
+    create_user_and_sign_in
     click_button 'Add Listing'
 
     expect(current_path).to eq '/listings/add'

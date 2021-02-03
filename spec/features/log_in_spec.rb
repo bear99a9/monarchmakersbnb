@@ -3,7 +3,6 @@ feature 'Log in' do
 
   scenario 'A user can log in' do
     expect(current_path).to eq('/listings')
-    # The below will need to change once we have find method
     expect(page).to have_content('Hi name')
   end
 
