@@ -32,7 +32,7 @@ class MMBB < Sinatra::Base
   end
 
   post '/listings' do
-    Listing.create(name: params[:name], description: params[:description], price_per_night: params[:price_per_night])
+    Listing.create(name: params[:name], description: params[:description], price_per_night: params[:price_per_night], user_id: session[:user_id])
     redirect('/listings')
   end
 
