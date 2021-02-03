@@ -1,7 +1,3 @@
-require './lib/database_connection.rb'
+require './lib/database_connection'
 
-if ENV['ENVIRONMENT'] == 'test'
-  DatabaseConnection.setup('mmbb_test')
-else
-  DatabaseConnection.setup('mmbb')
-end
+ENV['ENVIRONMENT'] == 'test' ? DatabaseConnection.setup('mmbb_test') : DatabaseConnection.setup('mmbb')

@@ -1,8 +1,16 @@
 feature 'Log in' do
-  scenario 'A user can log in' do
-    create_user_and_sign_in
+  before { create_user_and_sign_in }
 
+  scenario 'A user can log in' do
     expect(current_path).to eq('/listings')
-    expect(page).to have_content('Hi test@test.com')
+    expect(page).to have_content('Hi name')
   end
+
+  scenario 'User sees right things when logged in' do
+    expect(page).to have_button('Log out')
+    expect(page).not_to have_button('Log in')
+    expect(page).not_to have_button('Sign up')
+    expect(page).to have_button('Add Listing')
+  end
+
 end

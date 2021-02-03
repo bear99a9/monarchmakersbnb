@@ -30,9 +30,18 @@
 
 <h1> Welcome to MMBB!</h1>
 
-<% if @name %>
-<h2> Hi <%= @name %> </h2>
-<% end %>
+<% if @user %>
+<h2> Hi <%= @user.name %> </h2>
+
+<form  action="/sessions/destroy" method="post">
+  <button type="submit" name="Log out">Log out</button>
+</form>
+
+<form action='/listings/add' method='get'>
+  <input type='submit' value='Add Listing'/>
+</form>
+
+<% else %>
 
 <div class="dropdown">
   <span>Log in</span>
@@ -45,17 +54,12 @@
   </div>
 </div>
 
-<form  action="/sessions/destroy" method="post">
-  <button type="submit" name="Log out">Log out</button>
-</form>
-
 <form action="/users/new" method="get">
   <button type="submit" name="Sign up">Sign up</button>
 </form>
 
-<form action='/listings/add' method='get'>
-  <input type='submit' value='Add Listing'/>
-</form>
+<% end %>
+
 
 <% @listings.each do |listing|  %>
   <h2><%= listing.name %> </h2>

@@ -1,6 +1,6 @@
 require 'database_connection'
 
-describe DatabaseConnection do
+describe DatabaseConnection do 
   describe '.setup' do
     it 'sets up a connection to the database' do
 
