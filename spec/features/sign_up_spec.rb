@@ -57,6 +57,7 @@ feature 'Sign up' do
     fill_in('username', with: "jsmith1")
     click_button('Submit')
     message = page.find('#password').native.attribute("validationMessage")
-    expect(message).to eq "Please fill in this field."
+    messages = ["Please fill in this field.", "Please fill out this field."]
+    expect(messages).to include message
   end
 end
