@@ -3,7 +3,7 @@
 require_relative 'database_connection'
 
 class Listing
-  attr_reader :id, :name, :description, :price_per_night
+  attr_reader :id, :name, :description, :price_per_night, :user_id
 
   def initialize(id:, name:, description:, price_per_night:, user_id:)
     @id = id

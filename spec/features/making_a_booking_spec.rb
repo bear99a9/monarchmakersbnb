@@ -18,6 +18,7 @@ feature "making a booking" do
     expect(page).to have_content(listing.name)
     expect(page).to have_content(listing.description)
     expect(page).to have_content("£#{listing.price_per_night} per night")
+    expect(page).to have_content('Anna')
   end
 
 end

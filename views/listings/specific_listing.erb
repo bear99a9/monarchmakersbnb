@@ -1,5 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @listing.name %></title>
+</head>
+<body>
+  
 <h1> Welcome to MMBB!</h1>
 
 <h2><%= @listing.name %></h2>
-<h4><%= @listing.description %> </h4>
-<h4>£<%= @listing.price_per_night %> per night</h4>
+<h4><%= @listing.description %>
+<br>£<%= @listing.price_per_night %> per night
+<br>Host: <%= @host.name %>  </h4>
+
+
+</body>

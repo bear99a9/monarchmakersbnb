@@ -15,6 +15,9 @@ class MMBB < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
+  configure do
+    set :public_dir, "public"
+  end
   register Sinatra::Flash
 
   enable :sessions
@@ -46,6 +49,7 @@ class MMBB < Sinatra::Base
                 description: result['description'],
                 price_per_night: result['price_per_night'].to_i,
                 user_id: result['user_id'])
+    @host = User.find(id: @listing.user_id)
     erb :'listings/specific_listing'
   end
 
