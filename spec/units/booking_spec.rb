@@ -29,15 +29,15 @@ describe Booking do
     end
   end
 
-  describe '.find_all(by:, id:)' do
-    it 'displays all bookings by current user' do
+  describe '.where(field:, id:)' do
+    it 'displays all bookings field current user' do
       listing_2 = Listing.create(name: 'My other place', description: '2 bed', price_per_night: 200, user_id: user.id)
 
       booking
       booking_2 = Booking.create(visitor_id: user.id, listing_id: listing_2.id)
       booking_3 = Booking.create(visitor_id: user_2.id, listing_id: listing.id)
 
-      bookings = Booking.find_all(by: "visitor", id: user.id)
+      bookings = Booking.where(field: "visitor", id: user.id)
 
       expect(bookings.length).to eq 2
       expect(bookings).not_to include booking_3
@@ -53,7 +53,7 @@ describe Booking do
       booking_2 = Booking.create(visitor_id: user.id, listing_id: listing_2.id)
       booking_3 = Booking.create(visitor_id: user_2.id, listing_id: listing.id)
 
-      bookings = Booking.find_all(by: "listing", id: listing.id)
+      bookings = Booking.where(field: "listing", id: listing.id)
 
       expect(bookings.length).to eq 2
       expect(bookings).not_to include booking_2
