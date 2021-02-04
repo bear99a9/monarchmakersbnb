@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="<%= url('/application.css') %>" rel="stylesheet" type="text/css" />
+  <title><%= @listing.name %></title>
+</head>
+<body>
+
+<h1> Welcome to MMBB!</h1>
+
+<h2><%= @listing.name %></h2>
+<h4><%= @listing.description %>
+<br>£<%= @listing.price_per_night %> per night
+<br>Host: <%= @host.name %>  </h4>
+
+<form action='/bookings' method='post'>
+    <input type="hidden" name="listing_id" value="<%=@listing.id%>">
+    <input type='submit' value='Book'/>
+</form>
+</body>

@@ -1,3 +1,10 @@
+<html>
+<head>
+  <link href="<%= url('/application.css') %>" rel="stylesheet" type="text/css" />
+  <title>Welcome to MMBB</title>
+</head>
+<body>
+
 <%= flash[:notice] %>
 <form action="/users" method="post">
   <input id="name" type="text" name="name" placeholder="name" required="required">
