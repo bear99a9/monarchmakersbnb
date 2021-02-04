@@ -10,10 +10,8 @@ class Booking
   end
 
   def self.create(listing_id:, visitor_id:, status: 'pending')
-    results = DatabaseConnection.query("INSERT INTO booking (visitor_id, listing_id, status)
-                                        VALUES ('#{visitor_id}', '#{listing_id}', '#{status}')
-                                        returning id, visitor_id, listing_id, status").first
-
+    results = DatabaseConnection.safe_insert(table: 'booking', columns: ['listing_id', 'visitor_id', 'status'],
+                                            values: [listing_id, visitor_id, status]).first
     Booking.new(id: results["id"],
                 visitor_id: results["visitor_id"],
                 listing_id: results["listing_id"],

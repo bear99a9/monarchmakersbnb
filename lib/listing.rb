@@ -14,10 +14,8 @@ class Listing
   end
 
   def self.create(name:, description:, price_per_night:, user_id:)
-    result = DatabaseConnection.query("INSERT INTO listing(name, description,
-      price_per_night, user_id) VALUES('#{name}', '#{description}', '#{price_per_night}', '#{user_id}')
-      RETURNING id, name, description, price_per_night, user_id;").first
-
+    result = DatabaseConnection.safe_insert(table: 'listing', columns: ['name', 'description', 'price_per_night', 'user_id'],
+                                            values: [name, description, price_per_night, user_id]).first
     Listing.new(id: result['id'],
                 name: result['name'],
                 description: result['description'],
