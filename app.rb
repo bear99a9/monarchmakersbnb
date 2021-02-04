@@ -9,7 +9,7 @@ require './lib/listing'
 require './lib/user'
 require './lib/booking'
 require './lib/database_connection'
-
+require 'webdrivers'
 
 class MMBB < Sinatra::Base
   configure :development do
