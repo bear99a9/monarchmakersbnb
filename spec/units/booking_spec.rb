@@ -62,4 +62,30 @@ describe Booking do
       expect(bookings.last.visitor_id).to eq user_2.id
     end
   end
+
+  describe '.update' do
+    it 'approves a pending booking' do
+      owner_listing = listing
+      customer = create_anna
+
+      booking = Booking.create(visitor_id: customer.id, listing_id: owner_listing.id)
+      booking_update = Booking.update(id: booking.id, status: 'approved')
+
+      expect(booking_update.status).to eq 'approved'
+      expect(booking_update.status).not_to eq 'rejected'
+      expect(booking_update.status).not_to eq 'pending'
+    end
+
+    it 'rejects a pending booking' do
+      owner_listing = listing
+      customer = create_anna
+
+      booking = Booking.create(visitor_id: customer.id, listing_id: owner_listing.id)
+      booking_update = Booking.update(id: booking.id, status: 'rejected')
+
+      expect(booking_update.status).not_to eq 'approved'
+      expect(booking_update.status).to eq 'rejected'
+      expect(booking_update.status).not_to eq 'pending'
+    end
+  end
 end
