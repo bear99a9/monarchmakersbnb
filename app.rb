@@ -15,6 +15,9 @@ class MMBB < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
+  # configure do
+  #   set :public_dir, "public"
+  # end
   register Sinatra::Flash
 
   enable :sessions
@@ -40,13 +43,20 @@ class MMBB < Sinatra::Base
   end
 
   get '/listings/:id' do
-    result = DatabaseConnection.query("select * from listing where id = #{params[:id]}").first
-    @listing = Listing.new(id: result['id'],
-                name: result['name'],
-                description: result['description'],
-                price_per_night: result['price_per_night'].to_i,
-                user_id: result['user_id'])
+    @listing = Listing.find(id: params[:id])
+    @host = User.find(id: @listing.user_id)
     erb :'listings/specific_listing'
+  end
+
+  post '/bookings' do
+    Booking.create(listing_id: params[:listing_id], visitor_id: session[:user].id, status: 'pending')
+    redirect "/users/#{session[:user].id}/bookings"
+  end
+
+  get '/users/:id/bookings' do
+    @bookings = Booking.where(field: "visitor", id: session[:user].id)
+    @listings = @bookings.map { | booking | Listing.find(id: booking.listing_id) }
+    erb :'bookings/index'
   end
 
   get '/users/new' do
