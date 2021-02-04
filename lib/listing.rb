@@ -35,6 +35,15 @@ class Listing
     Listing.map_results(results)
   end
 
+  def self.find(id:)
+    result = DatabaseConnection.query("select * from listing where id = '#{id}'").first
+    Listing.new(id: result['id'],
+                name: result['name'],
+                description: result['description'],
+                price_per_night: result['price_per_night'].to_i,
+                user_id: result['user_id'])
+  end
+
   private
 
   def self.map_results(results)

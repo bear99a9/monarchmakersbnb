@@ -62,4 +62,16 @@ describe Listing do
       expect(listings.last.id).not_to eq(listing_3.id)
     end
   end
+
+  describe '.find' do
+    it 'returns a specific listing based on id' do
+      listing_1 = listing
+      listing_2 = Listing.create(name: name, description: description, price_per_night: price_per_night, user_id: user.id)
+      listing_find = Listing.find(id: listing_1.id)
+
+      expect(listing_find).to be_a(Listing)
+      expect(listing_find.id).to eq(listing_1.id)
+      expect(listing_find.name).to eq(listing_1.name)
+    end
+  end
 end
