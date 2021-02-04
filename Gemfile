@@ -13,8 +13,10 @@ gem 'webrick'
 
 group :test do
   gem 'capybara', require: false
+  gem 'puma'
   gem 'rspec', require: false
   gem 'rubocop'
+  gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'simplecov-console', require: false
 end

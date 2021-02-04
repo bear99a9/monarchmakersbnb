@@ -25,6 +25,7 @@ Capybara.app = MMBB
 
 RSpec.configure do |config|
   config.before(:each) do
+    Capybara.use_default_driver
     truncate_test_database
   end
 
