@@ -24,6 +24,7 @@ feature "making a booking" do
 
   scenario "clicking the Book button" do
     click_button("Book")
+    expect(current_path).to match /\/users\/.+\/bookings/
     expect(page.status_code).to eq 200
     expect(page).to have_content(listing.name)
     expect(page).to have_content(listing.description)
