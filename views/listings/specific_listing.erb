@@ -13,5 +13,8 @@
 <br>£<%= @listing.price_per_night %> per night
 <br>Host: <%= @host.name %>  </h4>
 
-
+<form action='/bookings' method='post'>
+    <input type="hidden" name="listing_id" value="<%=@listing.id%>">
+    <input type='submit' value='Book'/>
+</form>
 </body>

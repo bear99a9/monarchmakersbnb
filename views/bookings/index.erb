@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href='application.css' type='text/css' rel='stylesheet'>
+  <title>Your bookings</title>
+</head>
+
+<% for i in 0...@bookings.length %>
+  <h2><%= @listings[i].name %> </h2>
+  <h4><%= @listings[i].description %> </h4>
+  <h4>£<%= @listings[i].price_per_night %> per night</h4>
+  <h4><%= @bookings[i].status.capitalize %> </h4>
+<% end %>

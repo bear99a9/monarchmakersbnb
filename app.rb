@@ -53,6 +53,28 @@ class MMBB < Sinatra::Base
     erb :'listings/specific_listing'
   end
 
+  post '/bookings' do
+    Booking.create(listing_id: params[:listing_id], visitor_id: session[:user].id, status: 'pending')
+    redirect '/bookings'
+  end
+
+  get '/bookings' do
+    @bookings = Booking.find_all(by: "visitor", id: session[:user].id)
+    listing_ids = @bookings.map { | booking | booking.listing_id }
+    #@listings = listing_ids.map { | listing_id | Listings.find(listing_id: listing_id) }
+    @listings = []
+    listing_ids.each { | listing_id |
+      result = DatabaseConnection.query("select * from listing where id = #{listing_id}").first
+      @listings.push(Listing.new(id: result['id'],
+                  name: result['name'],
+                  description: result['description'],
+                  price_per_night: result['price_per_night'].to_i,
+                  user_id: result['user_id']))
+    }
+
+    erb :'bookings/index'
+  end
+
   get '/users/new' do
     erb :'users/new'
   end
