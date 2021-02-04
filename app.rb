@@ -39,6 +39,16 @@ class MMBB < Sinatra::Base
     redirect('/listings')
   end
 
+  get '/listings/:id' do
+    result = DatabaseConnection.query("select * from listing where id = #{params[:id]}").first
+    @listing = Listing.new(id: result['id'],
+                name: result['name'],
+                description: result['description'],
+                price_per_night: result['price_per_night'].to_i,
+                user_id: result['user_id'])
+    erb :'listings/specific_listing'
+  end
+
   get '/users/new' do
     erb :'users/new'
   end
