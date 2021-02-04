@@ -29,15 +29,15 @@ describe Booking do
     end
   end
 
-  describe '.find_all(by:, id:)' do
-    it 'displays all bookings by current user' do
+  describe '.where(field:, id:)' do
+    it 'displays all bookings field current user' do
       listing_2 = Listing.create(name: 'My other place', description: '2 bed', price_per_night: 200, user_id: user.id)
 
       booking
       booking_2 = Booking.create(visitor_id: user.id, listing_id: listing_2.id)
       booking_3 = Booking.create(visitor_id: user_2.id, listing_id: listing.id)
 
-      bookings = Booking.find_all(by: "visitor", id: user.id)
+      bookings = Booking.where(field: "visitor", id: user.id)
 
       expect(bookings.length).to eq 2
       expect(bookings).not_to include booking_3
@@ -53,13 +53,39 @@ describe Booking do
       booking_2 = Booking.create(visitor_id: user.id, listing_id: listing_2.id)
       booking_3 = Booking.create(visitor_id: user_2.id, listing_id: listing.id)
 
-      bookings = Booking.find_all(by: "listing", id: listing.id)
+      bookings = Booking.where(field: "listing", id: listing.id)
 
       expect(bookings.length).to eq 2
       expect(bookings).not_to include booking_2
       expect(bookings).to all(be_an_instance_of(Booking))
       expect(bookings.first.visitor_id).to eq user.id
       expect(bookings.last.visitor_id).to eq user_2.id
+    end
+  end
+
+  describe '.update' do
+    it 'approves a pending booking' do
+      owner_listing = listing
+      customer = create_anna
+
+      booking = Booking.create(visitor_id: customer.id, listing_id: owner_listing.id)
+      booking_update = Booking.update(id: booking.id, status: 'approved')
+
+      expect(booking_update.status).to eq 'approved'
+      expect(booking_update.status).not_to eq 'rejected'
+      expect(booking_update.status).not_to eq 'pending'
+    end
+
+    it 'rejects a pending booking' do
+      owner_listing = listing
+      customer = create_anna
+
+      booking = Booking.create(visitor_id: customer.id, listing_id: owner_listing.id)
+      booking_update = Booking.update(id: booking.id, status: 'rejected')
+
+      expect(booking_update.status).not_to eq 'approved'
+      expect(booking_update.status).to eq 'rejected'
+      expect(booking_update.status).not_to eq 'pending'
     end
   end
 end
