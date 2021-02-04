@@ -22,23 +22,24 @@ class Booking
 
   def self.all
     results = DatabaseConnection.query("SELECT * FROM booking order by id desc")
-    results.map do |row|
-      Booking.new(id: row['id'],
-                  visitor_id: row['visitor_id'],
-                  listing_id: row['listing_id'],
-                  status: row['status'])
-                end
+    Booking.map_results(results)
   end
 
-  def self.find_all(by:, id:)
+  def self.where(field:, id:)
     return nil unless id
-    return nil unless by == "visitor" || by == "listing"
-    results = DatabaseConnection.query("SELECT * FROM booking WHERE #{by}_id = '#{id}';")
+    return nil unless field == "visitor" || field == "listing"
+    results = DatabaseConnection.query("SELECT * FROM booking WHERE #{field}_id = '#{id}';")
+    Booking.map_results(results)
+  end
+
+  private
+
+  def self.map_results(results)
     results.map do |row|
       Booking.new(id: row['id'],
                   visitor_id: row['visitor_id'],
                   listing_id: row['listing_id'],
                   status: row['status'])
-                end
+    end
   end
 end

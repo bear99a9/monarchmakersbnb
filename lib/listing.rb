@@ -27,6 +27,17 @@ class Listing
 
   def self.all
     results = DatabaseConnection.query('select * from listing order by id desc')
+    Listing.map_results(results)
+  end
+
+  def self.where(user_id:)
+    results = DatabaseConnection.query("select * from listing where user_id = '#{user_id}'")
+    Listing.map_results(results)
+  end
+
+  private
+
+  def self.map_results(results)
     results.map do |row|
       Listing.new(id: row['id'],
                   name: row['name'],

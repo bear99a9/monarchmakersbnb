@@ -46,4 +46,20 @@ describe Listing do
       expect(listings.last.price_per_night).to eq(listing.price_per_night.to_i)
     end
   end
+
+  describe '.where' do
+    it 'returns all listing via user_id' do
+      user_2 = create_anna
+      listing_1 = Listing.create(name: name, description: description, price_per_night: price_per_night, user_id: user.id)
+      listing_2 = Listing.create(name: name, description: description, price_per_night: price_per_night, user_id: user.id)
+      listing_3 = Listing.create(name: name, description: description, price_per_night: price_per_night, user_id: user_2.id)
+
+      listings = Listing.where(user_id: user.id)
+
+      expect(listings).to all(be_a(Listing))
+      expect(listings.length).to eq(2)
+      expect(listings.first.id).to eq(listing_1.id)
+      expect(listings.last.id).not_to eq(listing_3.id)
+    end
+  end
 end
