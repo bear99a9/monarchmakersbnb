@@ -32,6 +32,15 @@ class Booking
     Booking.map_results(results)
   end
 
+  def self.update(id:, status:)
+    result = DatabaseConnection.query("update booking set status = '#{status}' where id = '#{id}'
+      returning id, visitor_id, listing_id, status").first
+      Booking.new(id: result["id"],
+                  visitor_id: result["visitor_id"],
+                  listing_id: result["listing_id"],
+                  status: result["status"] )
+  end
+
   private
 
   def self.map_results(results)
