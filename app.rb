@@ -21,6 +21,7 @@ class MMBB < Sinatra::Base
   register Sinatra::Flash
 
   enable :sessions
+  enable :method_override
 
   get '/' do
     'Hello World!'
@@ -30,6 +31,8 @@ class MMBB < Sinatra::Base
   get '/listings' do
     @listings = Listing.all
     @user = session[:user]
+    @new_booking = true
+    flash.now[:notice] = %Q[<a href="/users/#{@user.id}/listings">One of your listings has a new booking</a>] if @user
     erb :'listings/index'
   end
 
@@ -50,6 +53,15 @@ class MMBB < Sinatra::Base
     erb :'listings/specific_listing'
   end
 
+  patch '/bookings/:id' do
+    if params[:choice] == "Approve"
+      Booking.update(id: params[:id], status: "accepted")
+    elsif params[:choice] == "Deny"
+      Booking.update(id: params[:id], status: "denied")
+    end
+    redirect "/users/#{session[:user].id}/listings"
+  end
+
   post '/bookings' do
     Booking.create(listing_id: params[:listing_id], visitor_id: session[:user].id, status: 'pending')
     redirect "/users/#{session[:user].id}/bookings"
@@ -60,6 +72,14 @@ class MMBB < Sinatra::Base
     @listings = @bookings.map { | booking | Listing.find(id: booking.listing_id) }
     @user = session[:user]
     erb :'bookings/index'
+  end
+
+  get '/users/:id/listings' do
+    @user = session[:user]
+    @listings = Listing.where(user_id: @user.id)
+    @bookings = Hash.new
+    @listings.each { |listing| @bookings[listing.id] = Booking.where(field: "listing", id: listing.id) }
+    erb :'users/my_listings'
   end
 
   get '/users/new' do

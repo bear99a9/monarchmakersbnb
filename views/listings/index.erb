@@ -4,6 +4,9 @@
 <body>
 
 <% if @user %>
+  
+<%= flash[:notice] if @new_booking %>
+  
 <form action='/listings/add' method='get'>
   <input type='submit' value='Add Listing'/>
 </form>
@@ -14,7 +17,7 @@
 <% @listings.each do |listing|  %>
   <h2><a href="/listings/<%=listing.id%>"> <%=listing.name %> </a></h2>
   <h4><%= listing.description %> </h4>
-  <h4><%= listing.price_per_night %> </h4>
+  <h4>£<%= listing.price_per_night %> per night </h4>
 <% end %>
 
 </body>

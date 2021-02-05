@@ -15,5 +15,6 @@ feature 'adding a listing' do
 
     expect(current_path).to eq '/listings'
     expect(page).to have_content '1 sussex way'
+    expect(page).to have_content '£300 per night'
   end
 end

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href='application.css' type='text/css' rel='stylesheet'>
+  <title>My Listings</title>
+</head>
+
+<body>
+
+<h1> Welcome to MMBB!</h1>
+
+<% if @user %>
+<h2> Hi <%= @user.name %> </h2>
+
+<form  action="/sessions/destroy" method="post">
+  <button type="submit" name="Log out">Log out</button>
+</form>
+
+<form action='/listings/add' method='get'>
+  <input type='submit' value='Add Listing'/>
+</form>
+
+<form action="/users/<%= @user.id %>/bookings" method='get'>
+  <input type='submit' value='My Bookings'/>
+</form>
+
+<% @listings.each do |listing|  %>
+  <div class="listing_<%= listing.id %>">
+    <h2><a href="/listings/<%=listing.id%>"> <%=listing.name %> </a></h2>
+    <h4><%= listing.description %>
+    <br>£<%= listing.price_per_night %> per night </h4>
+    <% @bookings[listing.id].each do |booking| %>
+      <% if booking.status == "pending" %>
+        <%= User.find(id: booking.visitor_id).name %> wants to book this property
+        <form action="/bookings/<%=booking.id%>" method='post'>
+          <input type='hidden' name='_method' value='patch'/>
+          <input type='submit' name=choice value='Approve'/>
+          <input type='submit' name=choice value='Deny'/>
+          </form>
+        <%elsif booking.status == "denied" %>
+        <%= User.find(id: booking.visitor_id).name %>'s request was denied
+        <%elsif booking.status == "accepted" %>
+        <%= User.find(id: booking.visitor_id).name %>'s request was accepted
+      <%end%>
+    <% end %>
+  </div>
+<% end %>
+
+
+<% else %>
+
+<div class="dropdown">
+  <span>Log in</span>
+  <div class="dropdown-content">
+    <form action="/sessions" method="post">
+      <input type='email' name='email' placeholder="email"/>
+      <input type='password' name='password' placeholder="password"/>
+      <button type="submit" name="Log in">Log in</button>
+    </form>
+  </div>
+</div>
+
+<form action="/users/new" method="get">
+  <button type="submit" name="Sign up">Sign up</button>
+</form>
+
+<% end %>
+
+</body>
+</html>
