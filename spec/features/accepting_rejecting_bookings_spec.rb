@@ -33,6 +33,18 @@ feature 'Accepting and rejecting bookings' do
       end
     end
 
+    scenario 'you reject a booking' do
+      visit("/users/#{anna.id}/listings")
+      within(".listing_#{listing.id}") do
+        click_button "Deny"
+        expect(current_path).to eq "/users/#{anna.id}/listings"
+        expect(page.status_code).to eq 200
+        expect(page).to have_content "name's request was denied"
+        expect(page).not_to have_button "Approve"
+        expect(page).not_to have_button "Deny"
+      end
+    end
+
   end
 
 end

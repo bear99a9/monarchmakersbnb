@@ -30,13 +30,18 @@
     <h4><%= listing.description %>
     <br>£<%= listing.price_per_night %> per night </h4>
     <% @bookings[listing.id].each do |booking| %>
-      <%= User.find(id: booking.visitor_id).name %> wants to book this property
-      <form action="/users/<%= @user.id %>/listings" method='get'>
-        <input type='submit' value='Approve'/>
-      </form>
-      <form action="/users/<%= @user.id %>/listings" method='get'>
-        <input type='submit' value='Deny'/>
-      </form>
+      <% if booking.status == "pending" %>
+        <%= User.find(id: booking.visitor_id).name %> wants to book this property
+        <form action="/bookings/<%=booking.id%>" method='post'>
+          <input type='hidden' name='_method' value='patch'/>
+          <input type='submit' name=choice value='Approve'/>
+          <input type='submit' name=choice value='Deny'/>
+          </form>
+        <%elsif booking.status == "denied" %>
+        <%= User.find(id: booking.visitor_id).name %>'s request was denied
+        <%elsif booking.status == "accepted" %>
+        <%= User.find(id: booking.visitor_id).name %>'s request was accepted
+      <%end%>
     <% end %>
   </div>
 <% end %>

@@ -21,6 +21,7 @@ class MMBB < Sinatra::Base
   register Sinatra::Flash
 
   enable :sessions
+  enable :method_override
 
   get '/' do
     'Hello World!'
@@ -49,6 +50,15 @@ class MMBB < Sinatra::Base
     @host = User.find(id: @listing.user_id)
     @user = session[:user]
     erb :'listings/specific_listing'
+  end
+
+  patch '/bookings/:id' do
+    if params[:choice] == "Approve"
+      Booking.update(id: params[:id], status: "accepted")
+    elsif params[:choice] == "Deny"
+      Booking.update(id: params[:id], status: "denied")
+    end
+    redirect "/users/#{session[:user].id}/listings"
   end
 
   post '/bookings' do
