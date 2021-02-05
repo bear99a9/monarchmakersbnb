@@ -30,6 +30,8 @@ class MMBB < Sinatra::Base
   get '/listings' do
     @listings = Listing.all
     @user = session[:user]
+    @new_booking = true
+    flash.now[:notice] = %Q[<a href="/users/#{@user.id}/listings">One of your listings has a new booking</a>] if @user
     erb :'listings/index'
   end
 
@@ -58,6 +60,14 @@ class MMBB < Sinatra::Base
     @bookings = Booking.where(field: "visitor", id: session[:user].id)
     @listings = @bookings.map { | booking | Listing.find(id: booking.listing_id) }
     erb :'bookings/index'
+  end
+
+  get '/users/:id/listings' do
+    @user = session[:user]
+    @listings = Listing.where(user_id: @user.id)
+    @bookings = Hash.new
+    @listings.each { |listing| @bookings[listing.id] = Booking.where(field: "listing", id: listing.id) }
+    erb :'users/my_listings'
   end
 
   get '/users/new' do

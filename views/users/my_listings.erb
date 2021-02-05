@@ -2,29 +2,7 @@
 <html>
 <head>
   <link href='application.css' type='text/css' rel='stylesheet'>
-  <title>Welcome to MMBB</title>
-  <style>
-  .dropdown {
-    position: relative;
-    display: inline-block;
-    border: 3px solid RGB(32,32,185);
-    border-radius: 25px;
-    padding: 5px;
-
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #F9F9F9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
-    z-index: 1;
-  }
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  </style>
+  <title>My Listings</title>
 </head>
 
 <body>
@@ -33,10 +11,6 @@
 
 <% if @user %>
 <h2> Hi <%= @user.name %> </h2>
-
-<%= flash[:notice] if @new_booking %>
-
-
 
 <form  action="/sessions/destroy" method="post">
   <button type="submit" name="Log out">Log out</button>
@@ -49,6 +23,24 @@
 <form action="/users/<%= @user.id %>/bookings" method='get'>
   <input type='submit' value='My Bookings'/>
 </form>
+
+<% @listings.each do |listing|  %>
+  <div class="listing_<%= listing.id %>">
+    <h2><a href="/listings/<%=listing.id%>"> <%=listing.name %> </a></h2>
+    <h4><%= listing.description %>
+    <br>£<%= listing.price_per_night %> per night </h4>
+    <% @bookings[listing.id].each do |booking| %>
+      <%= User.find(id: booking.visitor_id).name %> wants to book this property
+      <form action="/users/<%= @user.id %>/listings" method='get'>
+        <input type='submit' value='Approve'/>
+      </form>
+      <form action="/users/<%= @user.id %>/listings" method='get'>
+        <input type='submit' value='Deny'/>
+      </form>
+    <% end %>
+  </div>
+<% end %>
+
 
 <% else %>
 
@@ -67,13 +59,6 @@
   <button type="submit" name="Sign up">Sign up</button>
 </form>
 
-<% end %>
-
-
-<% @listings.each do |listing|  %>
-  <h2><a href="/listings/<%=listing.id%>"> <%=listing.name %> </a></h2>
-  <h4><%= listing.description %> </h4>
-  <h4>£<%= listing.price_per_night %> per night </h4>
 <% end %>
 
 </body>
