@@ -37,6 +37,7 @@ class MMBB < Sinatra::Base
   end
 
   get '/listings/add' do
+    @user = session[:user]
     erb :'listings/add'
   end
 
@@ -69,6 +70,7 @@ class MMBB < Sinatra::Base
   get '/users/:id/bookings' do
     @bookings = Booking.where(field: "visitor", id: session[:user].id)
     @listings = @bookings.map { | booking | Listing.find(id: booking.listing_id) }
+    @user = session[:user]
     erb :'bookings/index'
   end
 
@@ -85,7 +87,7 @@ class MMBB < Sinatra::Base
   end
 
   post '/users' do
-    session[:user] = User.create(name: params[:name], email: params[:email], username: params[:username], password: params[:password])
+    session[:user] = User.create(name: params[:name], email: params[:email_new], username: params[:username], password: params[:password_new])
 
     case session[:user]
     when "duplicate email"

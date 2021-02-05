@@ -34,10 +34,11 @@ feature "making a booking" do
     end
 
     scenario 'Can decide not to book and get back to listings' do
-      click_button("Back to listings")
+      click_button("Back")
       expect(current_path).to eq('/listings')
     end
   end
+
 
   context 'when not logged in' do
     let(:anna) { create_anna }
@@ -62,5 +63,6 @@ feature "making a booking" do
       click_button("Log in")
       expect(current_path).to eq('/listings')
     end
+
   end
 end
