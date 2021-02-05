@@ -45,6 +45,7 @@ class MMBB < Sinatra::Base
   get '/listings/:id' do
     @listing = Listing.find(id: params[:id])
     @host = User.find(id: @listing.user_id)
+    @user = session[:user]
     erb :'listings/specific_listing'
   end
 
