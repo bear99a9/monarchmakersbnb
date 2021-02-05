@@ -12,12 +12,10 @@ require './lib/database_connection'
 require 'webdrivers'
 
 class MMBB < Sinatra::Base
-  configure :development do
-    register Sinatra::Reloader
-  end
-  # configure do
-  #   set :public_dir, "public"
+  # configure :development do
+  #   register Sinatra::Reloader
   # end
+
   register Sinatra::Flash
 
   enable :sessions

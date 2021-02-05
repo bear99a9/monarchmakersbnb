@@ -10,7 +10,7 @@ feature 'Accepting and rejecting bookings' do
       create_user_and_sign_in
       click_link(listing.name)
       click_button('Book')
-      click_button('Back to listings')
+      click_button('Back')
       click_button('Log out')
       fill_in('email', with: anna.email)
       fill_in('password', with: 'password123')
@@ -45,6 +45,17 @@ feature 'Accepting and rejecting bookings' do
       end
     end
 
+    scenario 'you approve a booking' do
+      visit("/users/#{anna.id}/listings")
+      within(".listing_#{listing.id}") do
+        click_button "Approve"
+        expect(current_path).to eq "/users/#{anna.id}/listings"
+        expect(page.status_code).to eq 200
+        expect(page).to have_content "name's request was accepted"
+        expect(page).not_to have_button "Approve"
+        expect(page).not_to have_button "Deny"
+      end
+    end
   end
 
 end

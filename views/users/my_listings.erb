@@ -7,21 +7,11 @@
 
 <body>
 
-<h1> Welcome to MMBB!</h1>
-
 <% if @user %>
-<h2> Hi <%= @user.name %> </h2>
 
-<form  action="/sessions/destroy" method="post">
-  <button type="submit" name="Log out">Log out</button>
-</form>
 
 <form action='/listings/add' method='get'>
   <input type='submit' value='Add Listing'/>
-</form>
-
-<form action="/users/<%= @user.id %>/bookings" method='get'>
-  <input type='submit' value='My Bookings'/>
 </form>
 
 <% @listings.each do |listing|  %>
@@ -38,9 +28,9 @@
           <input type='submit' name=choice value='Deny'/>
           </form>
         <%elsif booking.status == "denied" %>
-        <%= User.find(id: booking.visitor_id).name %>'s request was denied
+        <%= User.find(id: booking.visitor_id).name %>'s request was denied</br>
         <%elsif booking.status == "accepted" %>
-        <%= User.find(id: booking.visitor_id).name %>'s request was accepted
+        <%= User.find(id: booking.visitor_id).name %>'s request was accepted</br>
       <%end%>
     <% end %>
   </div>
