@@ -21,6 +21,10 @@ class MMBB < Sinatra::Base
   enable :sessions
   enable :method_override
 
+  before do 
+    @user = session[:user]
+  end
+
   get '/' do
     'Hello World!'
     redirect('/listings')
@@ -28,14 +32,14 @@ class MMBB < Sinatra::Base
 
   get '/listings' do
     @listings = Listing.all
-    @user = session[:user]
+    # @user = session[:user]
     @new_booking = true
     flash.now[:notice] = %Q[<a href="/users/#{@user.id}/listings">One of your listings has a new booking</a>] if @user
     erb :'listings/index'
   end
 
   get '/listings/add' do
-    @user = session[:user]
+    # @user = session[:user]
     erb :'listings/add'
   end
 
@@ -47,7 +51,7 @@ class MMBB < Sinatra::Base
   get '/listings/:id' do
     @listing = Listing.find(id: params[:id])
     @host = User.find(id: @listing.user_id)
-    @user = session[:user]
+    # @user = session[:user]
     erb :'listings/specific_listing'
   end
 
@@ -68,12 +72,12 @@ class MMBB < Sinatra::Base
   get '/users/:id/bookings' do
     @bookings = Booking.where(field: "visitor", id: session[:user].id)
     @listings = @bookings.map { | booking | Listing.find(id: booking.listing_id) }
-    @user = session[:user]
+    # @user = session[:user]
     erb :'bookings/index'
   end
 
   get '/users/:id/listings' do
-    @user = session[:user]
+    # @user = session[:user]
     @listings = Listing.where(user_id: @user.id)
     @bookings = Hash.new
     @listings.each { |listing| @bookings[listing.id] = Booking.where(field: "listing", id: listing.id) }
@@ -90,9 +94,11 @@ class MMBB < Sinatra::Base
     case session[:user]
     when "duplicate email"
       flash[:notice] = "This email address has already been taken"
+      session[:user] = nil
       redirect '/users/new'
     when "duplicate username"
       flash[:notice] = "This username has already been taken"
+      session[:user] = nil
       redirect '/users/new'
     else
       redirect '/listings'
