@@ -4,8 +4,8 @@ feature 'Sign up' do
     click_button("Sign up")
     expect(current_path).to eq('/users/new')
 
-    fill_in('email', with: "test@test.com")
-    fill_in('password', with: "password123")
+    fill_in('email_new', with: "test@test.com")
+    fill_in('password_new', with: "password123")
     fill_in('name', with: "John Smith")
     fill_in('username', with: "jsmith1")
 
@@ -23,8 +23,8 @@ feature 'Sign up' do
   scenario 'sign up with a username that has already been taken' do
     User.create(name: "name", email: "test@test.com", username: "username", password: "password123" )
     visit('/users/new')
-    fill_in('email', with: "test1@test.com")
-    fill_in('password', with: "password123")
+    fill_in('email_new', with: "test1@test.com")
+    fill_in('password_new', with: "password123")
     fill_in('name', with: "John Smith")
     fill_in('username', with: "username")
 
@@ -36,8 +36,8 @@ feature 'Sign up' do
   scenario 'sign up with a email that has already been taken' do
     User.create(name: "name", email: "test@test.com", username: "username", password: "password123" )
     visit('/users/new')
-    fill_in('email', with: "test@test.com")
-    fill_in('password', with: "password123")
+    fill_in('email_new', with: "test@test.com")
+    fill_in('password_new', with: "password123")
     fill_in('name', with: "John Smith")
     fill_in('username', with: "name")
 
@@ -51,7 +51,7 @@ feature 'Sign up' do
     Capybara.current_driver = :selenium_headless
     visit('/users/new')
 
-    fill_in('email', with: "test@test.com")
+    fill_in('email_new', with: "test@test.com")
     # fill_in('password', with: "")
     fill_in('name', with: "John Smith")
     fill_in('username', with: "jsmith1")

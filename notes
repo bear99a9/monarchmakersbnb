@@ -1,0 +1,117 @@
+<head>
+  <link href='application.css' type='text/css' rel='stylesheet'>
+  <title>Welcome to MMBB</title>
+  <style>
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    border: 3px solid RGB(32,32,185);
+    border-radius: 25px;
+    padding: 5px;
+
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #F9F9F9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  </style>
+</head>
+
+add.erb
+
+<head>
+  <link href="<%= url('/application.css') %>" rel="stylesheet" type="text/css" />
+  <title>New listing</title>
+
+<style>
+  input[name=name] {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+
+  input[name=description] {
+    width: 50%;
+    height: 20%;
+    padding: 12px 20px;
+    text-align: top;
+    padding-top: -80px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+
+  input[name=price_per_night] {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+
+  input[type=submit] {
+      padding:20px 20px;
+      background:#2A7EDB;
+      font-size: 30px;
+      color: white;
+      border:0 none;
+      cursor:pointer;
+      -webkit-border-radius: 15px;
+      border-radius: 15px;
+      align: right;
+  }
+
+</style>
+</head>
+
+
+specific_listing.erb
+
+<head>
+  <link href="<%= url('/application.css') %>" rel="stylesheet" type="text/css" />
+  <title><%= @listing.name %></title>
+</head>
+
+
+listing/index.erb
+
+<% if @user %>
+<!-- <h2> Hi <%= @user.name %> </h2>
+
+<form  action="/sessions/destroy" method="post">
+   <input type="submit" value="Log out"/>
+</form> -->
+
+<form action='/listings/add' method='get'>
+  <input type='submit' value='Add Listing'/>
+</form>
+
+<!-- <form action="/users/<%= @user.id %>/bookings" method='get'>
+  <input type='submit' value='My Bookings'/>
+</form> -->
+
+<!-- <% else %> -->
+
+<!-- <div class="dropdown">
+  <span>Log in</span>
+  <div class="dropdown-content">
+    <form action="/sessions" method="post">
+      <input type='email' name='email' placeholder="email"/>
+      <input type='password' name='password' placeholder="password"/>
+      <input type="submit" value="Log in"/>
+    </form>
+  </div>
+</div> -->
+
+<!-- <form action="/users/new" method="get">
+  <input type="submit" value="Sign up"/>
+</form> -->
+
+<% end %>

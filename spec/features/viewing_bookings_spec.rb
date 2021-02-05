@@ -19,7 +19,7 @@ feature "viewing bookings" do
   scenario 'return to listings from my bookings' do
     create_user_and_sign_in
     click_button('My Bookings')
-    click_button('Back to listings')
+    click_button('Back')
     expect(current_path).to eq('/listings')
   end
 end

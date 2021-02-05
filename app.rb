@@ -64,7 +64,7 @@ class MMBB < Sinatra::Base
   end
 
   post '/users' do
-    session[:user] = User.create(name: params[:name], email: params[:email], username: params[:username], password: params[:password])
+    session[:user] = User.create(name: params[:name], email: params[:email_new], username: params[:username], password: params[:password_new])
 
     case session[:user]
     when "duplicate email"

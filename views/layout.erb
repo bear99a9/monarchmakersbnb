@@ -19,12 +19,44 @@
 <body>
   <header>
     <h1><a href="/">Monarch BnB</a></h1>
-    <!-- <nav>
-      <ul>
-        <li><a href="#">LINK 1</a></li>
-        <li><a href="#">LINK 2</a></li>
-      </ul>
-    </nav> -->
+    <nav>
+          <% if @user %>
+      <h2> Hi <%= @user.name %> </h2>
+
+      <form action="/users/<%= @user.id %>/bookings" method='get'>
+        <input type='submit' value='My Bookings'/>
+      </form>
+
+      <form  action="/sessions/destroy" method="post">
+        <input type="submit" value="Log out"/>
+      </form>
+
+      <!-- <form action='/listings/add' method='get'>
+        <input type='submit' value='Add Listing'/>
+      </form> -->
+
+      
+
+      <% else %>
+
+      <div class="dropdown">
+        <span></span>
+        <div class="dropdown-content">
+          <form action="/sessions" method="post">
+            <input type='email' name='email' placeholder="email"/>
+            <input type='password' name='password' placeholder="password"/>
+            <input type="submit" value="Log in"/>
+          </form>
+        </div>
+      </div>
+
+      <form action="/users/new" method="get">
+        <input type="submit" value="Sign up"/>
+      </form>
+
+      <% end %>
+     
+    </nav>
   </header>
 
   <main>
