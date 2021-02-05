@@ -1,15 +1,12 @@
 <html>
-<head>
-  <link href="<%= url('/application.css') %>" rel="stylesheet" type="text/css" />
-  <title>Welcome to MMBB</title>
-</head>
+
 <body>
 
 <%= flash[:notice] %>
 <form action="/users" method="post">
   <input id="name" type="text" name="name" placeholder="name" required="required">
   <input id="username" type="text" name="username" placeholder="username" required="required">
-  <input id="email" type="email" name="email" placeholder="email@email.com" required="required">
-  <input id="password" type="password" name="password" placeholder="password" required="required">
+  <input id="email" type="email" name="email_new" placeholder="email@email.com" required="required">
+  <input id="password" type="password" name="password_new" placeholder="password" required="required">
   <input type="submit" value="Submit">
 </form>

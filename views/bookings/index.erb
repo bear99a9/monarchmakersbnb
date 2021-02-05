@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link href='application.css' type='text/css' rel='stylesheet'>
   <title>Your bookings</title>
 </head>
 
 <h1> Here are your bookings </h1>
 <form action='/listings' method='get'>
-  <input type='submit' value='Back to listings'/>
+  <input type='submit' value='Back'/>
 </form>
 
 <% for i in 0...@bookings.length %>
