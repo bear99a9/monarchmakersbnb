@@ -2,10 +2,6 @@
 
 ## [Task](https://github.com/makersacademy/course/tree/master/makersbnb)
 
-# monarchmakersbnb
-
-## [Task](https://github.com/makersacademy/course/tree/master/makersbnb)
-
 ## Setting Up The Database
 
 1. Connect to `psql` in the command line.
